@@ -1,14 +1,32 @@
 import './User.js';
+import { Orders } from './orders';
+import { Session } from 'meteor/session';
+import { Meteor } from 'meteor/meteor'
+
+
+if (Meteor.isClient) {
+    Session.setDefaultPersistent("name", "");
+    Session.setDefaultPersistent("email", "");
+    Session.setDefaultPersistent("photos", {});
+}
+
+
+export function placeOrder(order) {
+    Orders.insert({
+        order
+    });
+}
 
 /**
  *
- * @param selectType - 0: not selected; 1: digital only; 2: digital + print
+ * @param selectType - 0: not selected; 1: digital only; 2: print only; 3 digital + print
  * @returns {number}
  */
 export function calculatePrice(selectType) {
     if      (selectType == 0) return 0;
-    else if (selectType == 1) return 1.1;
-    else                      return 0.6;
+    else if (selectType == 1) return 1;
+    else if (selectType == 2) return 2;
+    else                      return 1.5;
 }
 
 /**
@@ -23,24 +41,52 @@ function validateEmail(email) {
 
 /**
  * Returns a order object
+ * @param [session]
  * @param [username]
  * @param [email]
  * @param [photos]
  * @constructor
  */
-export function PhotoOrder(username = "", email = "", photos = {}) {
-    this.username = username;
-    this.email = email;
-    this.photos = photos;
+export function PhotoOrder(session=true, username = "", email = "", photos = {}) {
+    if (session) {
+        this.username = Session.get("name");
+        this.email = Session.get("email");
+        this.photos = Session.get("photos");
+    } else {
+        this.username = username;
+        this.email = email;
+        this.photos = photos;
+    }
 }
 
 PhotoOrder.prototype = {
-    /**
-     * @param photoId
-     * @param selectType - 0: not selected; 1: digital only; 2: digital + print
-     */
-    changePhotoStatus: function(photoId, selectType) {
-        this.photos[photoId] = selectType
+    savePhotos: function() {
+        Session.setPersistent("photos", this.photos);
+    },
+
+    addPrint: function(photoId) {
+        const s = this.photos.hasOwnProperty(photoId) ? this.photos[photoId] : 0;
+        if (s == 0 || s == 2)
+            this.photos[photoId] = s + 1;
+        this.savePhotos();
+    },
+    removePrint: function(photoId) {
+        const s = this.photos.hasOwnProperty(photoId) ? this.photos[photoId] : 0;
+        if (s == 1 || s == 3)
+            this.photos[photoId] = s - 1;
+        this.savePhotos();
+    },
+    addDigital: function(photoId) {
+        const s = this.photos.hasOwnProperty(photoId) ? this.photos[photoId] : 0;
+        if (s == 0 || s == 1)
+            this.photos[photoId] = s + 2;
+        this.savePhotos();
+    },
+    removeDigital: function(photoId) {
+        const s = this.photos.hasOwnProperty(photoId) ? this.photos[photoId] : 0;
+        if (s == 2 || s == 3)
+            this.photos[photoId] = s - 2;
+        this.savePhotos();
     },
 
     /**
@@ -84,6 +130,7 @@ PhotoOrder.prototype = {
      */
     changeUsername: function (username) {
         this.username = username;
+        Session.setPersistent("name", this.username);
     },
 
     /**
@@ -92,6 +139,7 @@ PhotoOrder.prototype = {
      */
     changeEmail: function (email) {
         this.email = email;
+        Session.setPersistent("email", this.email);
     },
 
     /**
@@ -102,6 +150,7 @@ PhotoOrder.prototype = {
         if (this.username === "") return "Bitte gib einen gültigen Namen ein.";
         else if (!validateEmail(this.email)) return "Bitte gib eine gütige Email-Adresse ein. Diese wird für die digitalen Bilder benötigt.";
         else if (this.getTotalPrice() === 0) return "Bitte wähle mindestens ein Photo aus.";
+        else return "";
     }
 };
 
