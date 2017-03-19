@@ -11,14 +11,19 @@ if (Meteor.isClient) {
 export const Orders = new Mongo.Collection(name);
 
 
-Orders.allow({
-    insert() {
-        return true;
-    }
-});
+
 
 if (Meteor.isServer) {
+    Orders.allow({
+        insert() {
+            return true;
+        }
+    });
+
     Meteor.publish(name, function () {
-        return Orders.find({});
+        console.log(this.userId);
+        if (this.userId !== null) {
+            return Orders.find({});
+        }
     });
 }
