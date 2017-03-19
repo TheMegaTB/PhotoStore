@@ -1,19 +1,17 @@
 import React from 'react';
-import { Orders } from '../../api/orders';
-import { PhotoOrder } from '../../api/api';
+import { PhotoOrder, placeOrder } from '../../api/api';
 
 
 export default class About extends React.Component {
     render() {
         function addExampleOrder() {
-            const user = new PhotoOrder("Hans Peter2", "hans@ma.il");
+            const order = new PhotoOrder();
+            order.changeUsername("Hansi");
 
-            user.changePhotoStatus(1, 2);
-            user.changePhotoStatus(1, 0);
+            order.addPrint(1);
+            order.addDigital(1);
 
-            Orders.insert({
-                user
-            });
+            placeOrder(order);
         }
 
         return (
