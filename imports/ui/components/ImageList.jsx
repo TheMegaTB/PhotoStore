@@ -11,7 +11,7 @@ function ImageList() {
     const images = [];
     for (let id = imageIDs.length; id > 1; id -= 2) {
         images.push(
-            <LazyLoad key={id} height={300} unmountIfInvisible={true}>
+            <LazyLoad key={id} height={300}>
                 <div className="row">
                     <div className="one-half column" style={{paddingBottom: 34}}><ImageCard imageID={id}/></div>
                     <div className="one-half column" style={{paddingBottom: 34}}><ImageCard imageID={id-1}/></div>

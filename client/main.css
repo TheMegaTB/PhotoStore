@@ -14,3 +14,12 @@ Header a, #login-buttons a {
   margin-right: 10px;
   color:inherit;
 }
+
+.mainBar {
+  position: fixed;
+  height: 70px;
+  bottom: 0;
+  background-color: white;
+  width: 100%;
+  z-index: 100;
+}
