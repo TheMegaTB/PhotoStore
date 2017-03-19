@@ -13,8 +13,8 @@ export default class LoginButtons extends React.Component {
 
 LoginButtons.propTypes = {
   align: React.PropTypes.string,
-}
+};
 
 LoginButtons.defaultProps = {
   align: 'right',
-}
+};
