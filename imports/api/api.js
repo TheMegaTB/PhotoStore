@@ -22,25 +22,25 @@ function validateEmail(email) {
 }
 
 /**
- * Returns a user object
+ * Returns a order object
  * @param [username]
  * @param [email]
  * @param [photos]
  * @constructor
  */
-export function PhotoUser(username = "", email = "", photos = {}) {
+export function PhotoOrder(username = "", email = "", photos = {}) {
     this.username = username;
     this.email = email;
     this.photos = photos;
 }
 
-PhotoUser.prototype = {
+PhotoOrder.prototype = {
     /**
      * @param photoId
      * @param selectType - 0: not selected; 1: digital only; 2: digital + print
      */
-    changePhoto: function(photoId, selectType) {
-        this.photos[id] = selectType
+    changePhotoStatus: function(photoId, selectType) {
+        this.photos[photoId] = selectType
     },
 
     /**
