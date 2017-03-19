@@ -1,0 +1,32 @@
+# Meteor files to ignore now handled by .ignore file within .Meteor folder automatically
+
+# npm package files to ignore
+node_modules/
+npm-debug.log
+
+# Webstorm IDE files to ignore
+.idea/*
+
+# Typing type definition files to ignore. Webstorm uses type definitions for autocomplete even without typescript
+typings/*
+
+fakeCSV/*.csv
+.DS_Store
+
+BJS.zip
+
+# Latex compiled files
+_minted-*
+*.bbl
+*.blg
+*.lol
+*.dvi
+*.fdb_latexmk
+*.fls
+*.aux
+*.lof
+*.log
+*.out
+*.gz
+*.toc
+*.lot
