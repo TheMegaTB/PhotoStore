@@ -59,7 +59,7 @@ export default class Header extends React.Component {
                             position: 'relative',
                             top: '10px',
                             left: '10px',
-                            width: '30%',
+                            width: '25%',
                             color: 'white',
                         }}
                     />
@@ -69,7 +69,7 @@ export default class Header extends React.Component {
                             position: 'relative',
                             top: '10px',
                             left: '30px',
-                            width: '30%',
+                            width: '25%',
                             border: '1px',
                             color: 'white',
                         }}
