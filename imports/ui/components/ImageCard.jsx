@@ -36,15 +36,15 @@ export default class ImageCard extends React.Component {
                 <CardMedia>
                     <img src="https://unsplash.it/1920/1080/?random"/>
                 </CardMedia>
-                <CardActions className="row">
+                <CardActions style={{whiteSpace: "nowrap"}}>
                     <FlatButton
-                        className="one-half column"
                         label="Digital"
+                        style={{width: "49%"}}
                         onClick={this.toggleDigital}
                         backgroundColor={this.state.digital ? cyan500 : undefined}/>
                     <FlatButton
-                        className="one-half column"
                         label="Abzug"
+                        style={{width: "49%"}}
                         onClick={this.toggleAnalog}
                         backgroundColor={this.state.analog ? cyan500 : undefined}/>
                 </CardActions>
