@@ -89,6 +89,16 @@ PhotoOrder.prototype = {
         this.savePhotos();
     },
 
+    printSelected: function(photoId) {
+        const s = this.photos.hasOwnProperty(photoId) ? this.photos[photoId] : 0;
+        return s == 1 || s == 3;
+    },
+
+    digitalSelected: function(photoId) {
+        const s = this.photos.hasOwnProperty(photoId) ? this.photos[photoId] : 0;
+        return s == 2 || s == 3;
+    },
+
     /**
      * Calculates the total price
      * @returns {number}

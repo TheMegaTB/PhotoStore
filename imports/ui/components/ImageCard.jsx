@@ -1,3 +1,5 @@
+import { Meteor } from 'meteor/meteor';
+
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia} from 'material-ui/Card';
 import {FlatButton} from 'material-ui';
@@ -9,8 +11,8 @@ export default class ImageCard extends React.Component {
         super(args);
 
         this.state = {
-            digital: false,
-            analog: false
+            digital: Meteor.CLIENT_USER.digitalSelected(this.props.imageID),
+            analog: Meteor.CLIENT_USER.printSelected(this.props.imageID)
         };
 
         this.toggleDigital = this.toggleDigital.bind(this);
@@ -18,10 +20,18 @@ export default class ImageCard extends React.Component {
     }
 
     toggleDigital() {
+        if (this.state.digital)
+            Meteor.CLIENT_USER.removeDigital(this.props.imageID);
+        else
+            Meteor.CLIENT_USER.addDigital(this.props.imageID);
         this.setState({digital: !this.state.digital});
     }
 
     toggleAnalog() {
+        if (this.state.analog)
+            Meteor.CLIENT_USER.removePrint(this.props.imageID);
+        else
+            Meteor.CLIENT_USER.addPrint(this.props.imageID);
         this.setState({analog: !this.state.analog});
     }
 
