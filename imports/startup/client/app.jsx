@@ -4,10 +4,11 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 import MainLayout from '../../ui/containers/MainLayout.jsx';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 Meteor.startup(() => {
   ReactDOM.render(
-    <MainLayout />,
-    document.getElementById('app')
+      <MuiThemeProvider><MainLayout /></MuiThemeProvider>,
+      document.getElementById('app')
   );
 });
