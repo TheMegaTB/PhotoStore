@@ -44,7 +44,7 @@ PhotoUser.prototype = {
     },
 
     /**
-     * calculates the total price
+     * Calculates the total price
      * @returns {number}
      */
     getTotalPrice: function() {
@@ -79,7 +79,7 @@ PhotoUser.prototype = {
     },
 
     /**
-     * changes the username
+     * Changes the username
      * @param username - the new username
      */
     changeUsername: function (username) {
@@ -87,7 +87,7 @@ PhotoUser.prototype = {
     },
 
     /**
-     * changes the email
+     * Changes the email
      * @param email - the new email
      */
     changeEmail: function (email) {
@@ -95,7 +95,7 @@ PhotoUser.prototype = {
     },
 
     /**
-     * returns the status of the current user/order
+     * Returns the status of the current user/order
      * @returns {string}
      */
     getStatus: function () {
