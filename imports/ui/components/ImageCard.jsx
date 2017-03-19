@@ -3,7 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import React from 'react';
 import {Card, CardActions, CardHeader, CardMedia} from 'material-ui/Card';
 import {FlatButton} from 'material-ui';
-import {cyan500} from 'material-ui/styles/colors';
+import {cyan500, cyan100} from 'material-ui/styles/colors';
 
 
 export default class ImageCard extends React.Component {
@@ -51,12 +51,16 @@ export default class ImageCard extends React.Component {
                         label="Digital"
                         style={{width: "49%"}}
                         onClick={this.toggleDigital}
-                        backgroundColor={this.state.digital ? cyan500 : undefined}/>
+                        backgroundColor={this.state.digital ? cyan500 : undefined}
+                        hoverColor={this.state.digital ? cyan100 : undefined}
+                    />
                     <FlatButton
                         label="Abzug"
                         style={{width: "49%"}}
                         onClick={this.toggleAnalog}
-                        backgroundColor={this.state.analog ? cyan500 : undefined}/>
+                        backgroundColor={this.state.analog ? cyan500 : undefined}
+                        hoverColor={this.state.analog ? cyan100 : undefined}
+                    />
                 </CardActions>
             </Card>
         );
