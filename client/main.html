@@ -1,0 +1,32 @@
+<head>
+  <title>newspaper-ranking</title>
+</head>
+
+<body>
+  {{> hello}}
+</body>
+
+<template name="hello">
+    <h1>{{current}}</h1>
+    {{#if current}}
+        <input type="text" placeholder="Erster Platz" id="first"/>
+        <input type="text" placeholder="Zweiter Platz" id="second"/>
+        <input type="text" placeholder="Dritter Platz" id="third"/>
+        <br>
+    {{else}}
+        <h3>Fertig. Jetzt kommen die Schüler.</h3>
+    {{/if}}
+    <button class="next">Nächster -></button>
+    <button class="print">Print stuff!</button>
+    <p>You've pressed the button {{counter}} times.</p>
+</template>
+
+<template name="info">
+  <h2>Learn Meteor!</h2>
+  <ul>
+    <li><a href="https://www.meteor.com/try" target="_blank">Do the Tutorial</a></li>
+    <li><a href="http://guide.meteor.com" target="_blank">Follow the Guide</a></li>
+    <li><a href="https://docs.meteor.com" target="_blank">Read the Docs</a></li>
+    <li><a href="https://forums.meteor.com" target="_blank">Discussions</a></li>
+  </ul>
+</template>
