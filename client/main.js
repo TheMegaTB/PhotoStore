@@ -1,4 +1,6 @@
 import '../imports/startup/client/main.js';
+import 'skeleton-css/css/skeleton.css';
+import 'skeleton-css/css/normalize.css';
 
 import injectTapEventPlugin from 'react-tap-event-plugin';
 
