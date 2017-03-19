@@ -11,6 +11,11 @@ export function calculatePrice(selectType) {
     else                      return 0.6;
 }
 
+/**
+ * Checks if the given email is a valid one
+ * @param email - the email
+ * @returns {boolean}
+ */
 function validateEmail(email) {
     const re = /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i;
     return re.test(email);
@@ -18,12 +23,12 @@ function validateEmail(email) {
 
 /**
  * Returns a user object
- * @param username
- * @param email
+ * @param [username]
+ * @param [email]
  * @param [photos]
  * @constructor
  */
-export function PhotoUser(username, email, photos = {}) {
+export function PhotoUser(username = "", email = "", photos = {}) {
     this.username = username;
     this.email = email;
     this.photos = photos;
@@ -38,6 +43,10 @@ PhotoUser.prototype = {
         this.photos[id] = selectType
     },
 
+    /**
+     * calculates the total price
+     * @returns {number}
+     */
     getTotalPrice: function() {
         let price = 0;
         for (let photoId in this.photos) {
@@ -47,10 +56,20 @@ PhotoUser.prototype = {
         return price;
     },
 
+    /**
+     * Returns the price for a single photo
+     * @param photoId
+     * @returns {number}
+     */
     getPriceOfPhoto: function(photoId) {
         return calculatePrice(this.photos[photoId]);
     },
 
+    /**
+     * Returns weather the user wants the image with print digital only or not at all
+     * @param photoId
+     * @returns {number}
+     */
     getSelectTypeOfPhoto: function(photoId) {
         if (this.photos.hasOwnProperty(photoId)) {
             return this.photos[photoId]
@@ -59,14 +78,26 @@ PhotoUser.prototype = {
         }
     },
 
+    /**
+     * changes the username
+     * @param username - the new username
+     */
     changeUsername: function (username) {
         this.username = username;
     },
 
+    /**
+     * changes the email
+     * @param email - the new email
+     */
     changeEmail: function (email) {
         this.email = email;
     },
 
+    /**
+     * returns the status of the current user/order
+     * @returns {string}
+     */
     getStatus: function () {
         if (this.username === "") return "Bitte gib einen gültigen Namen ein.";
         else if (!validateEmail(this.email)) return "Bitte gib eine gütige Email-Adresse ein. Diese wird für die digitalen Bilder benötigt.";
