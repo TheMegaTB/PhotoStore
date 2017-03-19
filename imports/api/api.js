@@ -17,6 +17,12 @@ export function placeOrder(order) {
     });
 }
 
+export function getOrders() {
+    return Orders.find({}).fetch();
+}
+
+console.log(getOrders());
+
 /**
  *
  * @param selectType - 0: not selected; 1: digital only; 2: print only; 3 digital + print
@@ -97,6 +103,24 @@ PhotoOrder.prototype = {
     digitalSelected: function(photoId) {
         const s = this.photos.hasOwnProperty(photoId) ? this.photos[photoId] : 0;
         return s == 2 || s == 3;
+    },
+
+    countPrint: function() {
+        let c = 0;
+        for (let photoId in this.photos) {
+            if (!this.photos.hasOwnProperty(photoId)) continue;
+            const s = this.photos[photoId];
+            if (s === 1 || s === 3) c++;
+        }
+    },
+
+    countDigital: function() {
+        let c = 0;
+        for (let photoId in this.photos) {
+            if (!this.photos.hasOwnProperty(photoId)) continue;
+            const s = this.photos[photoId];
+            if (s === 2 || s === 3) c++;
+        }
     },
 
     /**
