@@ -3,17 +3,49 @@ import {ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
 import TextField from 'material-ui/TextField';
-import {white} from 'material-ui/styles/colors';
-import Euro from 'material-ui/svg-icons/action/euro-symbol'
+import {white, grey300, cyan500, cyan200} from 'material-ui/styles/colors';
+import Done from 'material-ui/svg-icons/action/done'
+import AllDone from 'material-ui/svg-icons/action/done-all'
 
 export default class Header extends React.Component {
+    constructor(args) {
+        super(args);
+
+        this.state = {
+            buy: false
+        };
+
+        this.toggleBuy = this.toggleBuy.bind(this);
+
+    }
+
+    toggleBuy() {
+        this.setState({buy: !this.state.buy});
+    }
+
+    calculateBottom() {
+        if (this.state.buy) {
+            return 0;
+        } else if (Meteor.CLIENT_USER.getTotalPrice() == 0) {
+            return -170; //TODO: when calculatePrice is working --> -240
+        } else {
+            return -170;
+        }
+    }
+
     render() {
         return (
 
-            <Paper className="mainBar" zDepth={5}>
+            <Paper
+                className="mainBar"
+                zDepth={5}
+                style={{
+                    bottom: this.calculateBottom()
+                }}
+            >
                 <div className="bottomBarTopPart">
                     <ToolbarTitle
-                        text="Digital: ..."
+                        text={"Digital: " + Meteor.CLIENT_USER.countDigital()}
                         style={{
                             float: 'left',
                             position: 'relative',
@@ -24,7 +56,7 @@ export default class Header extends React.Component {
                         }}
                     />
                     <ToolbarTitle
-                        text="Abzug: ..."
+                        text={"Abzug: " + Meteor.CLIENT_USER.countPrint()}
                         style={{
                             float: 'left',
                             position: 'relative',
@@ -34,19 +66,15 @@ export default class Header extends React.Component {
                             width: '25%',
                         }}
                     />
-                    <FlatButton
-                        label="Bestellen für ..."
-                        labelPosition="before"
-                        primary={true}
-                        icon={<Euro />}
-                        backgroundColor={white}
-                        hoverColor="lightgrey"
+                    <ToolbarTitle
+                        text={"Preis: " + Meteor.CLIENT_USER.getTotalPrice()}
                         style={{
                             float: 'right',
                             position: 'relative',
-                            top: '20px',
-                            right: '10px',
-                            width: '30%',
+                            right: this.state.buy ? '10px' : '25%',
+                            top: '10px',
+                            color: 'white',
+                            width: '10%',
                         }}
                     />
                 </div>
@@ -57,24 +85,61 @@ export default class Header extends React.Component {
                             position: 'relative',
                             top: '10px',
                             left: '10px',
-                            width: '25%',
+                            width: '50%',
                             color: 'white',
                         }}
                     />
+                    <br/>
                     <TextField
                         hintText="E-Mail"
                         style={{
                             position: 'relative',
                             top: '10px',
-                            left: '30px',
-                            width: '25%',
+                            left: '10px',
+                            width: '50%',
                             border: '1px',
                             color: 'white',
+                            float: 'top',
+                        }}
+                    />
+                    <br/>
+                    <ToolbarTitle
+                        text={Meteor.CLIENT_USER.getStatus()} //TODO: automatic update on TextField change
+                        style={{
+                            float: 'left',
+                            position: 'relative',
+                            left: '10px',
+                            top: '10px',
+                            color: 'red',
+                            width: '50%',
                         }}
                     />
                 </div>
-
+                <FlatButton
+                    label={this.state.buy ? "Abschließen" : "Weiter"}
+                    labelPosition="before"
+                    primary={true}
+                    icon={
+                        !this.state.buy ? <Done color={cyan200}/> : <AllDone color={white}/>
+                    }
+                    backgroundColor={this.state.buy ? cyan500 : white}
+                    hoverColor={this.state.buy ? cyan200 : grey300}
+                    onClick={this.toggleBuy}
+                    secondary={this.state.buy}
+                    style={{
+                        float: 'right',
+                        position: 'absolute',
+                        bottom: this.state.buy ? 15 : 185,
+                        right: '15px',
+                        width: '25%',
+                    }}
+                    labelStyle={{
+                        color: !this.state.buy ? cyan500 : white
+                    }}
+                />
             </Paper>
         );
     }
+
+
 }

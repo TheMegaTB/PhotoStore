@@ -76,6 +76,7 @@ PhotoOrder.prototype = {
             const s = this.photos[photoId];
             if (s === 1 || s === 3) c++;
         }
+        return c;
     },
 
     countDigital: function() {
@@ -85,6 +86,7 @@ PhotoOrder.prototype = {
             const s = this.photos[photoId];
             if (s === 2 || s === 3) c++;
         }
+        return c;
     },
 
     /**
