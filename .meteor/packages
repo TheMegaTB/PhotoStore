@@ -31,5 +31,8 @@ accounts-password@1.3.4
 gadicc:blaze-react-component
 u2622:persistent-session
 shell-server
+<<<<<<< HEAD
 gadicohen:robots-txt
+=======
+>>>>>>> 9b47ccc5b80155a7ffe961c0a8dc5f8ccb8f1205
 jabbslad:basic-auth
