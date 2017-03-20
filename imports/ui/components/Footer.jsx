@@ -1,6 +1,4 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import {ToolbarTitle} from 'material-ui/Toolbar';
 import FlatButton from 'material-ui/FlatButton';
 import Paper from 'material-ui/Paper';
