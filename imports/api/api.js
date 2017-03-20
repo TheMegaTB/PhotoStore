@@ -18,6 +18,7 @@ export function getOrders() {
     });
 }
 
+//TODO remove
 const o = getOrders();
 for (let a in o) {
     console.log(o[a].getTotalPrice())
