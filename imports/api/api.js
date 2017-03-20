@@ -1,9 +1,8 @@
-import './User.js';
-import { Orders } from './orders';
-import { Session } from 'meteor/session';
-import { Meteor } from 'meteor/meteor'
-import { PhotoOrder } from './photoOrder'
-
+import "./User.js";
+import {Orders} from "./orders";
+import {Session} from "meteor/session";
+import {Meteor} from "meteor/meteor";
+import {PhotoOrder} from "./photoOrder";
 
 
 export function placeOrder(order) {

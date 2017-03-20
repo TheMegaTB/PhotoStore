@@ -11,8 +11,6 @@ if (Meteor.isClient) {
 export const Orders = new Mongo.Collection(name);
 
 
-
-
 if (Meteor.isServer) {
     Orders.allow({
         insert() {

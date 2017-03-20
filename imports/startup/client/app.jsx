@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom';
 import MainLayout from '../../ui/containers/MainLayout.jsx';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-import { PhotoOrder } from '../../api/api';
+import '../../api/api';
+import { PhotoOrder } from '../../api/photoOrder';
 
 
 Meteor.startup(() => {
