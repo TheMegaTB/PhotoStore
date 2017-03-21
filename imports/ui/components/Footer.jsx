@@ -7,7 +7,8 @@ import {white, grey300, cyan500, cyan200} from 'material-ui/styles/colors';
 import Done from 'material-ui/svg-icons/action/done'
 import AllDone from 'material-ui/svg-icons/action/done-all'
 
-export default class Header extends React.Component {
+export default class Footer extends React.Component { //TODO: Auto update things on change
+
     constructor(args) {
         super(args);
 
@@ -52,29 +53,31 @@ export default class Header extends React.Component {
                             left: '10px',
                             top: '10px',
                             color: 'white',
-                            width: '25%',
+                            width: 'auto',
                         }}
                     />
                     <ToolbarTitle
-                        text={"Abzug: " + Meteor.CLIENT_USER.countPrint()}
+                        text={"Abzüge: " + Meteor.CLIENT_USER.countPrint()}
                         style={{
                             float: 'left',
                             position: 'relative',
-                            left: '10px',
+                            left: '40px',
                             top: '10px',
                             color: 'white',
-                            width: '25%',
+                            width: 'auto',
                         }}
                     />
                     <ToolbarTitle
-                        text={"Preis: " + Meteor.CLIENT_USER.getTotalPrice()}
+                        text={"Preis: " + Meteor.CLIENT_USER.getTotalPrice() + " €"}
                         style={{
                             float: 'right',
                             position: 'relative',
-                            right: this.state.buy ? '10px' : '25%',
+                            right: '10px',
+                            text_align: 'right',
                             top: '10px',
                             color: 'white',
-                            width: '10%',
+                            width: 'auto',
+                            visibility: this.state.buy ? 'visible' : 'hidden',
                         }}
                     />
                 </div>
@@ -131,7 +134,7 @@ export default class Header extends React.Component {
                         position: 'absolute',
                         bottom: this.state.buy ? 15 : 185,
                         right: '15px',
-                        width: '25%',
+                        width: 'auto',
                     }}
                     labelStyle={{
                         color: !this.state.buy ? cyan500 : white
@@ -140,6 +143,5 @@ export default class Header extends React.Component {
             </Paper>
         );
     }
-
 
 }

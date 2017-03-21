@@ -147,9 +147,9 @@ PhotoOrder.prototype = {
      * @returns {string}
      */
     getStatus: function () {
-        if (this.username === "") return "Bitte gib einen gültigen Namen ein.";
-        else if (!validateEmail(this.email)) return "Bitte gib eine gütige Email-Adresse ein. Diese wird für die digitalen Bilder benötigt.";
-        else if (this.getTotalPrice() === 0) return "Bitte wähle mindestens ein Photo aus.";
+        if (this.username === "") return "Name ungültig";
+        else if (!validateEmail(this.email)) return "E-Mail ungültig";
+        else if (this.getTotalPrice() === 0) return "Min. 1 Foto wählen";
         else return "";
     }
 };

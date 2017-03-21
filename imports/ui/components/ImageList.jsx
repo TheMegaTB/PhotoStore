@@ -24,6 +24,7 @@ function ImageList() {
         <div className="list container">
             <Subheader>Kindheitshelden</Subheader>
             {images}
+            <div>Scroll to see more</div>
         </div>
     );
 }
